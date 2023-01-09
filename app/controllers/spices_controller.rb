@@ -14,14 +14,14 @@ class SpicesController < ApplicationController
 
     #PATCH /spices/:id 
     def update
-        spice = Spice.find(params[:id])
+        spice = find_spice
         spice.update(spice_params)
         render json: spice, status: :ok
     end
 
     #DELETE /spices/:id
     def destroy
-        spice = Spice.find(params[:id])
+        spice = find_spice
         spice.destroy
         head :no_content
     end
@@ -32,5 +32,10 @@ class SpicesController < ApplicationController
     def spice_params
         params.permit(:title, :image, :description, :notes, :rating)
     end
+
+    def find_spice
+        Spice.find(params[:id])
+    end
+
 
   end
